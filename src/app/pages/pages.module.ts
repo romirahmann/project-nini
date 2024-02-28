@@ -2,13 +2,20 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { PagesRoutingModule } from './pages-routing.module';
-
+import { LayoutsModule } from '../layouts/layouts.module';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { ThresholdComponent } from './threshold/threshold.component';
+import { DataMasterComponent } from './data-master/data-master.component';
+import { ListQuestionsComponent } from './list-questions/list-questions.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [],
-  imports: [
-    CommonModule,
-    PagesRoutingModule
-  ]
+  declarations: [
+    DashboardComponent,
+    ThresholdComponent,
+    DataMasterComponent,
+    ListQuestionsComponent,
+  ],
+  imports: [CommonModule, PagesRoutingModule, LayoutsModule, FormsModule],
 })
-export class PagesModule { }
+export class PagesModule {}

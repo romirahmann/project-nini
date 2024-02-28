@@ -1,0 +1,82 @@
+<div class="container">
+  <h1 class="text-primary font-bold">LIST QUESTIONS THRESHOLD</h1>
+  <div class="card-table bg-white p-10 rounded-xl shadow-md md:mt-5">
+    <div class="flex justify-between">
+      <button
+        class="text-white bg-primary hover:bg-secondary focus:bg-secondary px-3 py-1 rounded-xl"
+      >
+        <i class="fa-solid fa-plus"></i> <span class="ms-3">Add Question</span>
+      </button>
+      <div class="pb-4 bg-white dark:bg-gray-900">
+        <label for="table-search" class="sr-only">Search</label>
+        <div class="relative mt-1">
+          <div
+            class="absolute inset-y-0 rtl:inset-r-0 start-0 flex items-center ps-3 pointer-events-none"
+          >
+            <svg
+              class="w-4 h-4 text-gray-500 dark:text-gray-400"
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 20 20"
+            >
+              <path
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
+              />
+            </svg>
+          </div>
+          <input
+            type="text"
+            id="table-search"
+            class="block pt-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 shadow-md"
+            placeholder="Search..."
+          />
+        </div>
+      </div>
+    </div>
+
+    <div class="relative p-5 mt-5">
+      <table
+        class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400"
+      >
+        <thead class="text-xs text-gray-700 uppercase">
+          <tr class="border-b-2">
+            <th scope="col" class="px-3 py-3">No</th>
+            <th scope="col" class="px-3 py-3">Faktor Kesebandingan</th>
+            <th scope="col" class="px-3 py-3">Kategori</th>
+            <th scope="col" class="px-3 py-3">Question</th>
+            <th scope="col" class="px-3 py-3">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            class="bg-gradient-to-r from-white to-blue-50 hover:bg-gray-50 dark:hover:bg-gray-600"
+          >
+            <td
+              scope="row"
+              class="px-2 py-4 text-center font-medium text-gray-900 whitespace-nowrap dark:text-white"
+            >
+              1
+            </td>
+            <td class="px-6 py-4">Silver</td>
+            <td class="px-6 py-4">Laptop</td>
+            <td class="px-6 py-4">Laptop</td>
+
+            <td class="px-1 py-4">
+              <button class="mx-2">
+                <i class="fa-solid fa-pen-to-square text-primary"></i>
+              </button>
+              <button class="mx-2">
+                <i class="fa-solid fa-trash text-red-500"></i>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

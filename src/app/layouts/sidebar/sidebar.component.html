@@ -1,0 +1,104 @@
+<button
+  (click)="toggleSidebar()"
+  data-drawer-target="sidebar-multi-level-sidebar"
+  data-drawer-toggle="sidebar-multi-level-sidebar"
+  aria-controls="sidebar-multi-level-sidebar"
+  type="button"
+  class="inline-flex items-center p-2 mt-2 ms-3 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+>
+  <span class="sr-only">Open sidebar</span>
+  <svg
+    class="w-6 h-6"
+    aria-hidden="true"
+    fill="currentColor"
+    viewBox="0 0 20 20"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      clip-rule="evenodd"
+      fill-rule="evenodd"
+      d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z"
+    ></path>
+  </svg>
+</button>
+<aside
+  id="sidebar-multi-level-sidebar"
+  [ngClass]="{
+    '-translate-x-full': !isSidebarOpen,
+    'translate-x-0': isSidebarOpen
+  }"
+  class="fixed top-0 left-0 z-40 w-64 h-screen transition-transform sm:translate-x-0"
+  aria-label="Sidebar"
+>
+  <div class="h-full px-3 py-4 overflow-y-auto text-white dark:bg-gray-800">
+    <a href="#" class="flex items-center ps-2.5 mb-5">
+      <img src="./../../../assets/img/logo-Taxflash.png" alt="" />
+    </a>
+    <div class="menu">
+      <ul class="space-y-2 font-medium mt-10">
+        <li>
+          <a
+            routerLink=""
+            class="flex items-center p-2 rounded-lg text-primary hover:bg-secondary hover:text-black"
+          >
+            <i class="fa-solid fa-rectangle-list"></i>
+            <span class="ms-3">Dashboard</span>
+          </a>
+        </li>
+        <li *ngIf="userLogin?.role_id === 1">
+          <a
+            routerLink="/data-master"
+            class="flex items-center p-2 rounded-lg text-primary hover:bg-secondary hover:text-black"
+          >
+            <i class="fa-solid fa-users"></i>
+            <span class="ms-3">Data Master</span>
+          </a>
+        </li>
+        <li>
+          <a
+            (click)="toggleSubMenuThreshold()"
+            class="flex items-center p-2 rounded-lg text-primary hover:bg-secondary hover:text-black"
+          >
+            <i class="fa-solid fa-list-ul"></i>
+            <span class="ms-3">Threshold</span>
+            <i class="fa-solid fa-chevron-down ml-16"></i>
+          </a>
+          <ul id="submenu-threshold" class="ml-8 space-y-2 hidden">
+            <!-- Sub-menu items -->
+            <li *ngIf="userLogin?.role_id === 1">
+              <a
+                routerLink="/list-questions"
+                class="flex items-center p-2 text-primary rounded-lg hover:bg-secondary hover:text-black group"
+              >
+                <span class="ms-3">Data Questions</span>
+              </a>
+            </li>
+            <li>
+              <a
+                routerLink=""
+                class="flex items-center p-2 text-primary rounded-lg hover:bg-secondary hover:text-black group"
+              >
+                <span class="ms-3">Add Threshold</span>
+              </a>
+            </li>
+
+            <!-- Add more sub-menu items as needed -->
+          </ul>
+        </li>
+        <li>
+          <a
+            (click)="logout()"
+            class="flex items-center p-2 rounded-lg text-primary hover:bg-secondary hover:text-black mt-80 md:mt-[23rem]"
+          >
+            <i class="fa-solid fa-right-from-bracket"></i>
+            <span class="ms-3">Logout</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</aside>
+
+<div class="md:p-20 p-5 sm:ml-64">
+  <router-outlet></router-outlet>
+</div>
