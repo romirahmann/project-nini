@@ -3,6 +3,7 @@
   <div class="card-table bg-white p-10 rounded-xl shadow-md md:mt-5">
     <div class="flex justify-between">
       <button
+        (click)="toogleModal(1, null)"
         class="text-white bg-primary hover:bg-secondary focus:bg-secondary px-3 py-1 rounded-xl"
       >
         <i class="fa-solid fa-plus"></i> <span class="ms-3">Add Question</span>
@@ -30,6 +31,9 @@
             </svg>
           </div>
           <input
+            [(ngModel)]="searchQuery"
+            (input)="onSearch()"
+            name="searchQuery"
             type="text"
             id="table-search"
             class="block pt-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 shadow-md"
@@ -53,30 +57,69 @@
           </tr>
         </thead>
         <tbody>
-          <tr
-            class="bg-gradient-to-r from-white to-blue-50 hover:bg-gray-50 dark:hover:bg-gray-600"
+          <ng-container
+            *ngFor="let question of displayQuestions; let i = index"
           >
-            <td
-              scope="row"
-              class="px-2 py-4 text-center font-medium text-gray-900 whitespace-nowrap dark:text-white"
+            <tr
+              class="bg-gradient-to-r from-white to-blue-50 hover:bg-gray-50 dark:hover:bg-gray-600"
             >
-              1
-            </td>
-            <td class="px-6 py-4">Silver</td>
-            <td class="px-6 py-4">Laptop</td>
-            <td class="px-6 py-4">Laptop</td>
+              <td
+                scope="row"
+                class="px-2 py-4 text-center font-medium text-gray-900 whitespace-nowrap dark:text-white"
+              >
+                {{ (currentPage - 1) * pageSize + i + 1 }}
+              </td>
+              <td class="px-6 py-4 text-wrap">
+                {{ question.faktor_description }}
+              </td>
+              <td class="px-6 py-4 text-wrap">{{ question.category_name }}</td>
+              <td class="px-6 py-4 text-wrap">{{ question.question }}</td>
 
-            <td class="px-1 py-4">
-              <button class="mx-2">
-                <i class="fa-solid fa-pen-to-square text-primary"></i>
-              </button>
-              <button class="mx-2">
-                <i class="fa-solid fa-trash text-red-500"></i>
-              </button>
-            </td>
-          </tr>
+              <td class="px-1 py-4">
+                <button (click)="toogleModal(2, question)" class="mx-2">
+                  <i class="fa-solid fa-pen-to-square text-primary"></i>
+                </button>
+                <button (click)="toogleModal(3, question)" class="mx-2">
+                  <i class="fa-solid fa-trash text-red-500"></i>
+                </button>
+              </td>
+            </tr>
+          </ng-container>
         </tbody>
       </table>
+      <div class="flex justify-between mt-5">
+        <div class="info-pagination">
+          Showing {{ getStartIndex() }} - {{ getEndIndex() }} entries
+          {{ entires }}
+        </div>
+        <div class="btn-pagination flex">
+          <!-- Previous Button -->
+          <button
+            [disabled]="currentPage === 1"
+            (click)="prevPage()"
+            class="flex items-center justify-center px-3 h-8 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+          >
+            Previous
+          </button>
+
+          <!-- Next Button -->
+          <button
+            [disabled]="currentPage === totalPages"
+            (click)="nextPage()"
+            class="flex items-center justify-center px-3 h-8 ms-3 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+          >
+            Next
+          </button>
+        </div>
+      </div>
     </div>
   </div>
 </div>
+
+<app-modal
+  id="modal"
+  tabindex="-1"
+  class="hidden absolute overflow-y-auto overflow-x-hidden flex w-screen h-screen justify-center items-center top-0 left-0 backdrop-blur-sm backdrop-brightness-75 shadow-md"
+  [dataReceived]="dataReceived"
+  (closeModalEvent)="toogleModal(0, null)"
+></app-modal>

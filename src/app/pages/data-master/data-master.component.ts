@@ -51,18 +51,40 @@ export class DataMasterComponent {
     }
   }
 
-  toogleModalEdit(user: any) {
+  toogleModal(category_toogle: number, user: any) {
     if (user !== null) {
-      let data = {
-        text: '',
-        category: 'EDIT_USERS',
-        username: user.username,
-        role_id: user.role_id,
-      };
-      this.dataReceived = data;
+      if (category_toogle === 1) {
+        let data = {
+          text: '',
+          category: 'EDIT_USERS',
+          user_id: user.user_id,
+          username: user.username,
+          role_id: user.role_id,
+        };
+        this.dataReceived = data;
 
-      const modal = document.querySelector('#modal');
-      modal?.classList.toggle('hidden');
+        const modal = document.querySelector('#modal');
+        modal?.classList.toggle('hidden');
+        this.getAllUsers();
+      }
+      if (category_toogle === 2) {
+        let data = {
+          text: `Remove ${user.username}`,
+          category: 'REMOVE_MODAL',
+          user_id: user.user_id,
+          username: user.username,
+          role_id: user.role_id,
+          funct: 'removeUser',
+        };
+        this.dataReceived = data;
+        const modal = document.querySelector('#modal');
+        modal?.classList.toggle('hidden');
+      }
+      if (category_toogle === 0) {
+        this.getAllUsers();
+        const modal = document.querySelector('#modal');
+        modal?.classList.toggle('hidden');
+      }
     } else {
       this.getAllUsers();
       const modal = document.querySelector('#modal');
