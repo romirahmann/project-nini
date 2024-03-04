@@ -30,6 +30,9 @@ export class ApiService {
   getAllQuestions(): Observable<any> {
     return this.http.get(`${this.apiUrl}/master/questions`);
   }
+  getAllQuestionsByFaktor(): Observable<any> {
+    return this.http.get(`${this.apiUrl}/master/questionsByFaktor`);
+  }
 
   // CATEGORIES
   getAllCategories(): Observable<any> {
@@ -39,5 +42,24 @@ export class ApiService {
   // FAKTOR
   getAllFaktor(): Observable<any> {
     return this.http.get(`${this.apiUrl}/master/faktors`);
+  }
+
+  // TP DOC
+  getAllTp(id: number): Observable<any> {
+    return this.http.get(`${this.apiUrl}/master/tp/${id}`);
+  }
+  getDetailTp(id: number): Observable<any> {
+    return this.http.get(`${this.apiUrl}/master/detail-tp/${id}`);
+  }
+  addTpDoc(data: any) {
+    return this.http.post(`${this.apiUrl}/master/tp`, data);
+  }
+  updateTpDoc(id: number, data: any) {
+    return this.http.put(`${this.apiUrl}/master/update-tp/${id}`, data);
+  }
+
+  // RESULT
+  addResult(data: any) {
+    return this.http.post(`${this.apiUrl}/master/result`, data);
   }
 }

@@ -1,0 +1,136 @@
+<div class="container">
+  <h1 class="text-primary font-bold">ADD THRESHOLD</h1>
+  <!-- ADD TP DOC -->
+  <div
+    id="card-tp"
+    class="card-table bg-white p-10 rounded-xl shadow-md md:mt-5"
+  >
+    <h1 class="text-primary font-bold mb-10">Add TP DOC</h1>
+    <!-- FORM TP DOC  -->
+    <form
+      class="space-y-4 md:space-y-6"
+      [formGroup]="formAddTpDoc"
+      (submit)="submitTp()"
+    >
+      <div class="mt-2 grid grid-cols-2 gap-x-8">
+        <div class="np">
+          <label
+            for="nama_perusahaan"
+            class="form-control block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            >Nama Perusahaan</label
+          >
+          <input
+            type="text"
+            formControlName="nama_perusahaan"
+            id="nama_perusahaan"
+            class="form-control bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          />
+        </div>
+        <div class="tp">
+          <label
+            for="nama_perusahaan"
+            class="form-control block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            >Tahun Pajak</label
+          >
+          <input
+            type="number"
+            formControlName="tahun_pajak"
+            id="tahun_pajak"
+            class="form-control bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          />
+        </div>
+      </div>
+      <button
+        type="submit"
+        class="w-full mt-5 text-white bg-primary hover:bg-secondary focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+      >
+        ADD
+      </button>
+    </form>
+  </div>
+
+  <!-- ADD THRESHOLD -->
+  <div
+    id="formQuestionCard"
+    class="card-table bg-white p-10 rounded-xl shadow-md md:mt-5"
+  >
+    <form
+      *ngIf="formAddFakor"
+      [formGroup]="formAddFakor"
+      (ngSubmit)="submitQuestion()"
+    >
+      <table
+        class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400"
+      >
+        <thead class="text-xs text-gray-700 uppercase">
+          <tr class="border-b-2">
+            <th scope="col" class="px-3 py-3">No</th>
+            <th scope="col" class="px-3 py-3">Faktor Kesebandingan</th>
+            <th scope="col" class="px-3 py-3">Kategori</th>
+            <th scope="col" class="px-3 py-3">Penjelasan</th>
+            <th scope="col" class="px-3 py-3">Transaksi Afiliasi</th>
+            <th scope="col" class="px-3 py-3">Transaksi Independent</th>
+            <th scope="col" class="px-3 py-3">Keterangan</th>
+            <th scope="col" class="px-3 py-3">No Halaman</th>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-container *ngFor="let question of questions; let i = index">
+            <tr
+              class="bg-gradient-to-r from-white to-blue-50 hover:bg-gray-50 dark:hover:bg-gray-600"
+            >
+              <td
+                scope="row"
+                class="px-2 py-4 text-center font-medium text-gray-900 whitespace-nowrap dark:text-white"
+              >
+                {{ i + 1 }}
+              </td>
+              <td class="px-6 py-4 text-wrap">
+                {{ question.faktor_description }}
+              </td>
+              <td class="px-6 py-4">{{ question.category_name }}</td>
+              <td class="px-6 py-4">{{ question.question }}</td>
+              <td class="px-6 py-4">
+                <input
+                  type="checkbox"
+                  value="true"
+                  formControlName="transaksi_afiliasi_{{
+                    question.question_id
+                  }}"
+                />
+              </td>
+              <td class="px-6 py-4">
+                <input
+                  type="checkbox"
+                  value="true"
+                  formControlName="transaksi_independent_{{
+                    question.question_id
+                  }}"
+                />
+              </td>
+              <td class="px-6 py-4">
+                <input
+                  type="text"
+                  class="w-full"
+                  formControlName="keterangan_{{ question.question_id }}"
+                />
+              </td>
+              <td class="px-6 py-4">
+                <input
+                  type="number"
+                  class="w-full"
+                  formControlName="no_halaman_{{ question.question_id }}"
+                />
+              </td></tr
+          ></ng-container>
+        </tbody>
+      </table>
+      <button
+        type="submit"
+        class="w-full mt-5 text-white bg-primary hover:bg-secondary focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+      >
+        SAVE
+      </button>
+    </form>
+  </div>
+</div>

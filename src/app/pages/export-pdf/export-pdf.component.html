@@ -1,0 +1,93 @@
+<div class="btn">
+  <button
+    (click)="exportToPdf('report_threshold')"
+    type="button"
+    class="mt-5 focus:outline-none text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-1 dark:focus:ring-yellow-900"
+  >
+    EXPORT PDF
+  </button>
+</div>
+<div class="pdf" #pdfContent>
+  <div id="template-pdf" class="container">
+    <div class="card-table bg-white p-6 rounded-xl shadow-md md:mt-5">
+      <p class="text-sm">H. FORMAT ANALISIS KESEBANDINGAN</p>
+      <p class="text-center my-5">ANALISIS KESEBANDINGAN</p>
+      <p class="text-primary">
+        <span>Nama Perusahaan : {{ dataTpDoc?.nama_perusahaan }}</span>
+      </p>
+      <p class="text-primary">
+        <span>Tahun Pajak : {{ dataTpDoc?.tahun_pajak }}</span>
+      </p>
+      <!-- TABLE FAKTOR 1 -->
+      <div class="relative mt-5">
+        <table
+          class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400"
+        >
+          <thead class="text-xs text-gray-700 uppercase">
+            <tr class="border-2">
+              <th scope="col" class="px-2 py-1">No</th>
+              <th scope="col" class="px-2 py-1">Faktor Kesebandingan</th>
+              <th scope="col" class="px-2 py-1">Kategori</th>
+              <th scope="col" class="px-2 py-1">Penjelasan</th>
+              <th scope="col" class="px-2 py-1">Transaksi Afiliasi</th>
+              <th scope="col" class="px-2 py-1">Transaksi Independent</th>
+              <th scope="col" class="px-2 py-1">Keterangan</th>
+              <th scope="col" class="px-2 py-1">No Halaman</th>
+            </tr>
+          </thead>
+          <tbody>
+            <ng-container
+              *ngFor="let threshold of dataThreshold; let i = index"
+            >
+              <tr class="border-2 hover:bg-gray-50 dark:hover:bg-gray-600">
+                <td
+                  scope="row"
+                  class="border-2 px-2 py-2 text-center font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                >
+                  {{ i + 1 }}
+                </td>
+                <td class="border-2 px-2 py-2 text-wrap">
+                  {{ threshold.faktor_description }}
+                </td>
+                <td class="border-2 px-2 py-2">
+                  {{ threshold.category_name }}
+                </td>
+                <td class="border-2 px-2 py-2">{{ threshold.question }}</td>
+                <td class="border-2 px-2 py-2 text-center">
+                  <span *ngIf="threshold.transaksi_afiliasi === 1"
+                    ><i class="fa-solid fa-check"></i
+                  ></span>
+                  <span *ngIf="threshold.transaksi_afiliasi === 0"></span>
+                </td>
+                <td class="border-2 px-2 py-2 text-center">
+                  <span *ngIf="threshold.transaksi_independent === 1"
+                    ><i class="fa-solid fa-check"></i
+                  ></span>
+                  <span *ngIf="threshold.transaksi_independent === 0"></span>
+                </td>
+                <td class="border-2 px-2 py-2">{{ threshold.description }}</td>
+                <td class="border-2 px-2 py-2 text-center">
+                  {{ threshold.no_halaman }}
+                </td>
+              </tr>
+            </ng-container>
+          </tbody>
+        </table>
+        <p class="mt-5">
+          Demikian surat keterangan ini dibuat dengan sebenarnya untuk dapat
+          ditindaklanjuti sesuai dengan perundang-undangan yang berlaku.
+        </p>
+        <div class="flex mt-10 justify-end">
+          <div class="flex flex-col">
+            <span>.........., ...............</span>
+            <span>yang memberikan keterangan</span>
+            <br />
+            <br />
+            <br />
+            <span>...........................</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

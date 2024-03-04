@@ -22,16 +22,28 @@ export class ModalComponent implements OnChanges {
   dataCategories!: any;
 
   // formEdit
-  formEdit!: any;
-  formEditQuestion!: any;
-  formAddQuestion!: any;
+  formEdit!: FormGroup;
+  formEditQuestion!: FormGroup;
+  formAddQuestion!: FormGroup;
+  formEditTpDoc!: FormGroup;
+  formEditThreshold!: FormGroup;
+
   constructor(private fb: FormBuilder, private apiService: ApiService) {}
 
   ngOnChanges(changes: SimpleChanges): void {
-    if ('dataReceived' in changes) {
-      this.createFormEditUser();
-      this.addQuestionForm();
-      this.createFormEditQuestion();
+    if ('dataReceived' in changes && this.dataReceived) {
+      if (this.dataReceived.category === 'EDIT_USERS') {
+        this.createFormEditUser();
+      }
+      if (this.dataReceived.category === 'ADD_QUESTION') {
+        this.addQuestionForm();
+      }
+      if (this.dataReceived.category === 'EDIT_QUESTION') {
+        this.createFormEditQuestion();
+      }
+      if (this.dataReceived.category === 'EDIT_TP') {
+        this.createFormTp();
+      }
     }
   }
 
@@ -135,7 +147,7 @@ export class ModalComponent implements OnChanges {
     if (this.dataReceived) {
       let data = this.dataReceived.question;
 
-      this.formEditQuestion = this.fb.group({
+      this.formEditTpDoc = this.fb.group({
         faktor_id: [data.faktor_id, [Validators.required]],
         category_id: data.category_id,
         question: [data.question, [Validators.required]],
@@ -150,5 +162,35 @@ export class ModalComponent implements OnChanges {
         console.log('REMOVE SUCCESSFULLY');
         this.closeModal();
       });
+  }
+
+  // FORM TP DOC
+  editTp() {
+    if (this.formEditTpDoc.valid) {
+      const id = this.dataReceived.dataTp.tp_doc_id;
+      const data = this.formEditTpDoc.value;
+      // console.log(id, data);
+      this.apiService.updateTpDoc(id, data).subscribe((res: any) => {
+        this.closeModal();
+      });
+    }
+  }
+  createFormTp() {
+    if (this.dataReceived) {
+      let data = this.dataReceived.dataTp;
+
+      this.formEditTpDoc = this.fb.group({
+        nama_perusahaan: [data.nama_perusahaan, Validators.required],
+        tahun_pajak: [data.tahun_pajak, Validators.required],
+      });
+    }
+  }
+  removeTp() {
+    const id = this.dataReceived.dataTp.tp_doc_id;
+    const data = { is_deleted: 1 };
+    // console.log(id, data);
+    this.apiService.updateTpDoc(id, data).subscribe((res: any) => {
+      this.closeModal();
+    });
   }
 }

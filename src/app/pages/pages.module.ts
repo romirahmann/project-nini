@@ -7,7 +7,10 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { ThresholdComponent } from './threshold/threshold.component';
 import { DataMasterComponent } from './data-master/data-master.component';
 import { ListQuestionsComponent } from './list-questions/list-questions.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AddThresholdComponent } from './threshold/add-threshold/add-threshold.component';
+import { ExportPdfComponent } from './export-pdf/export-pdf.component';
+import { NewAddComponent } from './threshold/new-add/new-add.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +18,16 @@ import { FormsModule } from '@angular/forms';
     ThresholdComponent,
     DataMasterComponent,
     ListQuestionsComponent,
+    AddThresholdComponent,
+    ExportPdfComponent,
+    NewAddComponent,
   ],
-  imports: [CommonModule, PagesRoutingModule, LayoutsModule, FormsModule],
+  imports: [
+    CommonModule,
+    PagesRoutingModule,
+    LayoutsModule,
+    FormsModule,
+    ReactiveFormsModule,
+  ],
 })
 export class PagesModule {}

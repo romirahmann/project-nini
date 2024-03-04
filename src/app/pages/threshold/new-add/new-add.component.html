@@ -1,0 +1,129 @@
+<div class="container">
+  <!-- ADD TP DOC -->
+  <div
+    id="card-tp"
+    class="card-table bg-white p-10 rounded-xl shadow-md md:mt-5"
+  >
+    <h1 class="text-primary font-bold mb-10">Add TP DOC</h1>
+    <!-- FORM TP DOC  -->
+    <form
+      class="space-y-4 md:space-y-6"
+      [formGroup]="formAddTpDoc"
+      (submit)="submitTp()"
+    >
+      <div class="mt-2 grid grid-cols-2 gap-x-8">
+        <div class="np">
+          <label
+            for="nama_perusahaan"
+            class="form-control block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            >Nama Perusahaan</label
+          >
+          <input
+            type="text"
+            formControlName="nama_perusahaan"
+            id="nama_perusahaan"
+            class="form-control bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          />
+        </div>
+        <div class="tp">
+          <label
+            for="nama_perusahaan"
+            class="form-control block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            >Tahun Pajak</label
+          >
+          <input
+            type="number"
+            formControlName="tahun_pajak"
+            id="tahun_pajak"
+            class="form-control bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          />
+        </div>
+      </div>
+      <button
+        type="submit"
+        class="w-full mt-5 text-white bg-primary hover:bg-secondary focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+      >
+        ADD
+      </button>
+    </form>
+  </div>
+
+  <!-- Question -->
+
+  <ng-container *ngFor="let faktor of questions; let i = index">
+    <div
+      id="card-questions"
+      class="card-table bg-white p-10 rounded-xl shadow-md md:mt-5"
+    >
+      <h1 class="text-primary font-bold mb-10">
+        {{ faktor.faktor_description }}
+      </h1>
+      <form
+        [formGroup]="formQuestions"
+        (submit)="submitQuestion()"
+        class="space-y-4 md:space-y-6"
+      >
+        <ng-container *ngFor="let question of faktor.questions">
+          <div class="questions mt-10">
+            <!-- <p class="font-bold">{{ question.category_name }}</p> -->
+            <p class="font-bold text-md mb-2">{{ question.question }}</p>
+            <div class="flex">
+              <div class="transaksi_afiliasi">
+                <input
+                  id="transaksi_afiliasi"
+                  type="checkbox"
+                  value="true"
+                  formControlName="transaksi_afiliasi_{{
+                    question.question_id
+                  }}"
+                />
+                <label for="transaksi_afiliasi" class="ms-2"
+                  >Transaksi Afiliasi</label
+                >
+              </div>
+              <div class="transaksi_independent ms-5">
+                <input
+                  id="transaksi_independent"
+                  type="checkbox"
+                  value="true"
+                  formControlName="transaksi_independent_{{
+                    question.question_id
+                  }}"
+                />
+                <label for="transaksi_independent" class="ms-2"
+                  >Transaksi Independent</label
+                >
+              </div>
+            </div>
+            <div class="flex mt-3">
+              <div class="keterangan">
+                <label for="keterangan">Keterangan</label>
+                <input
+                  id="keterangan"
+                  type="text"
+                  class="w-full rounded-md"
+                  formControlName="keterangan_{{ question.question_id }}"
+                />
+              </div>
+              <div class="noHalaman ms-5">
+                <label for="noHalaman">No Halaman</label>
+                <input
+                  id="noHalaman"
+                  type="number"
+                  class="w-full rounded-md"
+                  formControlName="no_halaman_{{ question.question_id }}"
+                />
+              </div>
+            </div>
+          </div>
+        </ng-container>
+        <button
+          type="submit"
+          class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+        >
+          SUBMIT
+        </button>
+      </form>
+    </div></ng-container
+  >
+</div>
